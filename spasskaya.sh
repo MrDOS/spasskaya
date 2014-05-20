@@ -17,7 +17,8 @@ playtimes ()
         fi
         bare_uuid=`echo "$uuid" | sed -e 's/-//g'`
         name=`curl -s https://sessionserver.mojang.com/session/minecraft/profile/"$bare_uuid" \
-    | grep -oP '.*\[' | grep -oP -m 1 '"name":".+?"' | sed -e 's/"name":"\(.*\)"/\1/'`
+            | grep -oP '.*\[' | grep -oP -m 1 '"name":".+?"' \
+            | sed -e 's/"name":"\(.*\)"/\1/'`
         playtime=`grep -oP '"stat.playOneMinute":\d+' "$player" | sed -e 's/.*://'`
 
         echo "$playtime $name"
