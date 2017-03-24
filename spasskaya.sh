@@ -35,7 +35,12 @@ format_playtimes ()
 
         total_seconds=`expr $playtime / 20`
         hours=`expr $total_seconds / 3600`
-        minutes=`expr \( $total_seconds % \( $hours \* 60 \) \) / 60`
+        if [ $hours -gt 0 ]
+        then
+            minutes=`expr \( $total_seconds % \( $hours \* 60 \) \) / 60`
+        else
+            minutes=`expr $total_seconds / 60`
+        fi
         seconds=`expr $total_seconds % 60`
 
         printf "%d:%02d:%02d %s\n" "$hours" "$minutes" "$seconds" "$name"
